@@ -1,364 +1,63 @@
-Marketing Revenue & Growth Case Study
+# Revenue Leak Analysis | Growth Marketing Case Study
 
-Turning Marketing Data Into Revenue Decisions
+An end-to-end marketing analytics project that investigates where leads are leaking from a B2B SaaS funnel and translates the analysis into a clear revenue plan.
 
-Catherine Lazare | Marketing Strategy • Revenue Growth • Marketing Analytics • Business Analysis
+## Executive summary
 
-⸻
+Analysis of **12,000 simulated leads** shows that the largest preventable leak occurs between marketing-qualified leads (MQLs) and sales-qualified leads (SQLs). Paid social is producing volume, but its MQL-to-SQL conversion rate trails the portfolio, while slow sales follow-up compounds the loss.
 
-📊 Project Overview
+| Opportunity | Estimated annualized revenue at risk | Recommended action |
+|---|---:|---|
+| Paid-social lead qualification gap | $637,560 | Tighten audience and introduce a qualification nurture path |
+| Slow follow-up on high-intent leads | $575,226 | Set a <24-hour sales-response SLA and alert on breaches |
+| Low webinar MQL-to-SQL conversion | $306,507 | Add intent scoring and sales-assisted webinar follow-up |
+| **Total prioritized opportunity** | **$1,519,293** | Run a 90-day funnel recovery plan |
 
-How can a marketing team increase revenue without simply spending more money to acquire more leads?
+These estimates are directional, based on expected deal value, observed stage conversion, and lead cohorts in the included synthetic dataset. See the assumptions in [`reports/revenue_leak_analysis.md`](reports/revenue_leak_analysis.md).
 
-This project analyzes a simulated B2B marketing funnel containing 5,000 leads to identify conversion bottlenecks, revenue leakage, channel performance, and opportunities for growth.
+## What’s included
 
-The analysis follows the complete customer journey:
+- [`data/leads.csv`](data/leads.csv) — 12,000 reproducibly simulated B2B SaaS leads
+- [`src/generate_data.py`](src/generate_data.py) — deterministic dataset generator
+- [`src/analyze_funnel.py`](src/analyze_funnel.py) — Python analysis that writes the KPI tables
+- [`sql/funnel_analysis.sql`](sql/funnel_analysis.sql) — portable SQLite SQL for funnel and revenue-leak analysis
+- [`dashboard/index.html`](dashboard/index.html) — self-contained interactive, Power BI-style dashboard
+- [`reports/revenue_leak_analysis.md`](reports/revenue_leak_analysis.md) — methodology, findings, and quantified leakage
+- [`reports/executive_recommendation.md`](reports/executive_recommendation.md) — 90-day recommendation for a marketing manager
 
-Lead → MQL → SQL → Opportunity → Customer → Revenue
+## Business question
 
-Rather than focusing only on lead volume, the project evaluates marketing performance based on its ability to generate qualified pipeline and revenue.
+How can a growth-marketing team reduce conversion leakage, improve the quality of handoffs to sales, and recover the highest-value revenue opportunity?
 
-⸻
+## Funnel definition
 
-Executive Snapshot
+`Lead → MQL → SQL → Opportunity → Customer`
 
-Metric	Result
-Leads Analyzed	5,000
-Simulated Revenue	$2.68M
-Estimated Revenue Opportunity	$3.16M
-Funnel Stages	6
-Marketing Channels	6
+The primary diagnostic is MQL-to-SQL conversion: it is the point where marketing intent becomes a sales-accepted conversation. The project also measures follow-up speed, expected revenue, and performance by channel and campaign.
 
-Key insight: The largest growth opportunity is not necessarily generating more leads. Improving conversion efficiency within the existing funnel can unlock significant additional revenue.
+## Reproduce the analysis
 
-⸻
+Requires Python 3.10+; the standard library is sufficient.
 
-🎯 Business Problem
+```bash
+python src/generate_data.py
+python src/analyze_funnel.py
+```
 
-The company is generating substantial marketing activity, but revenue growth is not keeping pace.
+The second command refreshes `outputs/channel_funnel.csv`, `outputs/campaign_funnel.csv`, and `outputs/summary.json`. Open `dashboard/index.html` in a browser to explore the dashboard.
 
-Leadership wants to understand:
+To run the SQL directly:
 
-* Which marketing channels produce the highest-quality leads?
-* Where are prospects dropping out of the funnel?
-* Which conversion stages represent the largest opportunities?
-* How much potential revenue is being lost?
-* Which marketing activities deserve additional investment?
-* Where should marketing and sales improve their handoff?
+```bash
+sqlite3 revenue_case_study.db < sql/funnel_analysis.sql
+```
 
-The goal is to move beyond activity-based marketing metrics and connect:
+Load `data/leads.csv` into a table named `leads` first. The Python analysis creates this SQLite database automatically.
 
-Marketing Activity → Customer Behavior → Pipeline → Revenue
+## Dashboard preview
 
-⸻
+The dashboard highlights funnel health, channel comparison, response-time performance, and the prioritized revenue-leak opportunities. It uses the generated output CSVs and Plotly from a CDN, so it can be opened locally without a server.
 
-🔎 What I Analyzed
+## Data note
 
-1. Funnel Performance
-
-I analyzed conversion across:
-
-Lead → MQL → SQL → Opportunity → Customer
-
-This identifies where prospects are being lost and where conversion improvements could have the greatest financial impact.
-
-⸻
-
-2. Marketing Channel Performance
-
-Six marketing channels were evaluated:
-
-* LinkedIn
-* Paid Search
-* Organic Search
-* Email
-* Webinar
-* Referral
-
-Each channel was evaluated based on:
-
-* Lead volume
-* MQL generation
-* SQL generation
-* Opportunity creation
-* Customer acquisition
-* Revenue
-* Marketing spend
-* Revenue-to-spend efficiency
-
-This prevents high-volume channels from automatically being treated as high-performing channels.
-
-⸻
-
-3. Revenue Leakage
-
-The analysis identifies potential revenue leakage at key funnel stages.
-
-The model benchmarks weaker conversion rates against the strongest observed performance within the simulated dataset.
-
-This produces an estimated revenue opportunity, not a claim of actual lost company revenue.
-
-Estimated revenue opportunity: ~$3.16M
-
-⸻
-
-4. Follow-Up Performance
-
-Lead follow-up timing was incorporated into the dataset to evaluate whether delayed follow-up could represent another source of revenue leakage.
-
-The analysis considers:
-
-Lead Created → Lead Assigned → First Contact → Qualified → Opportunity → Customer
-
-⸻
-
-📈 Dashboard
-
-The project includes executive-style visualizations designed to answer five questions:
-
-1. Where are leads coming from?
-2. Which channels produce qualified prospects?
-3. Which channels generate opportunities?
-4. Which channels generate revenue?
-5. Where is the funnel leaking?
-
-View Dashboard
-
-⸻
-
-🐍 Python Analysis
-
-The Python analysis calculates:
-
-* Funnel conversion rates
-* Channel performance
-* Marketing spend
-* Revenue
-* Pipeline value
-* Revenue-to-spend efficiency
-* Revenue leakage
-* Growth scenarios
-
-View Python Analysis
-
-⸻
-
-🗄️ SQL Analysis
-
-SQL queries reproduce the core marketing analysis from a database perspective.
-
-The queries demonstrate how to:
-
-* Aggregate funnel stages
-* Calculate conversion rates
-* Compare marketing channels
-* Analyze revenue
-* Evaluate follow-up performance
-
-View SQL Analysis
-
-⸻
-
-📊 Dataset
-
-The project uses a simulated dataset containing 5,000 B2B leads.
-
-Each record includes information such as:
-
-* Lead ID
-* Marketing channel
-* Industry
-* Company size
-* MQL status
-* SQL status
-* Opportunity status
-* Customer status
-* First-contact timing
-* Estimated annual contract value
-* Marketing spend
-* Pipeline value
-* Revenue
-* Lead score
-* Follow-up SLA status
-
-Explore the Dataset
-
-⸻
-
-💼 Executive Recommendation
-
-The analysis supports a simple strategic principle:
-
-Fix the funnel before scaling the funnel.
-
-Instead of immediately increasing acquisition spend, the recommended strategy is to:
-
-1. Improve Lead Qualification
-
-Refine lead scoring using:
-
-* Firmographic fit
-* Engagement
-* Intent
-* Industry
-* Company size
-* Website behavior
-* Content engagement
-
-2. Improve Marketing-to-Sales Handoff
-
-Establish clear definitions for:
-
-MQL → SQL → Opportunity
-
-and create measurable follow-up expectations.
-
-3. Strengthen Lead Nurturing
-
-Develop segmented nurture campaigns based on:
-
-* Buyer persona
-* Industry
-* Funnel stage
-* Product interest
-* Engagement
-* Purchase intent
-
-4. Optimize Opportunity Conversion
-
-Identify why qualified opportunities fail to become customers and address:
-
-* Value proposition
-* Sales enablement
-* Pricing objections
-* Competitive pressure
-* Customer experience
-
-5. Reallocate Marketing Investment
-
-Shift resources toward channels producing stronger downstream outcomes rather than simply the highest number of leads.
-
-⸻
-
-🚀 30/60/90-Day Marketing Plan
-
-Days 1–30 — Diagnose
-
-* Audit lead scoring
-* Define MQL/SQL criteria
-* Analyze response times
-* Identify funnel bottlenecks
-* Establish baseline KPIs
-* Build executive dashboard
-
-Days 31–60 — Optimize
-
-* Implement revised lead scoring
-* Launch segmented nurturing
-* Improve marketing/sales handoff
-* Establish follow-up SLA reporting
-* Reallocate underperforming channel spend
-
-Days 61–90 — Scale
-
-* Measure conversion improvement
-* Compare results against baseline
-* Calculate incremental pipeline and revenue
-* Scale high-performing campaigns
-* Reduce inefficient acquisition spend
-* Present revenue impact to leadership
-
-⸻
-
-🧠 Key Marketing Insight
-
-The most important question is not:
-
-“How many leads did marketing generate?”
-
-It is:
-
-“How much qualified pipeline and revenue did marketing create?”
-
-This project demonstrates how marketing data can be transformed into business decisions by connecting:
-
-Acquisition → Qualification → Conversion → Pipeline → Revenue
-
-⸻
-
-🛠️ Skills Demonstrated
-
-Marketing
-
-* Marketing strategy
-* Demand generation
-* Lead generation
-* Lead nurturing
-* Customer acquisition
-* Funnel optimization
-* Conversion optimization
-* Campaign analysis
-* Marketing performance measurement
-
-Analytics
-
-* Funnel analysis
-* Revenue analysis
-* Conversion-rate analysis
-* KPI development
-* Business intelligence
-* Data visualization
-* Performance reporting
-* Revenue opportunity modeling
-
-Technology
-
-* Python
-* SQL
-* Power BI-style dashboarding
-* CRM analytics
-* GA4 concepts
-* Marketing automation
-* Spreadsheet analysis
-
-⸻
-
-📁 Repository Structure
-
-marketing-revenue-growth-case-study/
-│
-├── README.md
-│
-├── data/
-│   └── simulated_b2b_marketing_funnel.csv
-│
-├── analysis/
-│   └── revenue_funnel_analysis.py
-│
-├── sql/
-│   └── marketing_funnel_queries.sql
-│
-├── dashboard/
-│   ├── marketing_funnel_dashboard.png
-│   └── channel_revenue.png
-│
-└── recommendations/
-    └── executive_marketing_recommendation.md
-
-⸻
-
-👩🏽‍💼 About Me
-
-Catherine Lazare
-
-Marketing Strategy | Revenue Growth | Marketing Analytics | Business Analysis
-
-I focus on the intersection of marketing strategy, analytics, customer acquisition, and revenue growth.
-
-My approach to marketing is centered on identifying where businesses lose potential customers, quantifying the business impact, and developing practical strategies to improve conversion and revenue.
-
-⸻
-
-📬 Contact
-
-LinkedIn: https://www.linkedin.com/in/msbattle
+All records are synthetic. Names, companies, and outcomes are simulated solely for this portfolio case study; no customer or prospect data is included.

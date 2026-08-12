@@ -1,0 +1,18 @@
+{
+    "total_leads":  12000,
+    "total_mqls":  6251,
+    "total_sqls":  2274,
+    "total_expected_arr":  49675200,
+    "overall_mql_sql_rate":  36.4,
+    "late_response_revenue_at_risk":  4452758,
+    "channel_revenue_leak":  [
+                                 {
+                                     "channel":  "Paid Social",
+                                     "annualized_revenue_at_risk":  637560
+                                 },
+                                 {
+                                     "channel":  "Webinar",
+                                     "annualized_revenue_at_risk":  306507
+                                 }
+                             ]
+}

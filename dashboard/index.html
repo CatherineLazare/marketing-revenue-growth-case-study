@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Revenue Leak Dashboard</title><script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    *{box-sizing:border-box} body{margin:0;background:#f4f6fa;color:#182235;font:15px Inter,Segoe UI,Arial,sans-serif}.shell{max-width:1440px;margin:auto;padding:30px}.hero{display:flex;justify-content:space-between;align-items:end;margin-bottom:22px}.hero h1{margin:0;font-size:28px}.hero p{margin:7px 0 0;color:#64748b}.tag{background:#e0e7ff;color:#3730a3;padding:7px 11px;border-radius:20px;font-weight:700}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card,.panel{background:#fff;border-radius:12px;box-shadow:0 2px 10px #1e293b12}.card{padding:18px}.label{color:#64748b;font-size:12px;text-transform:uppercase;font-weight:700;letter-spacing:.05em}.metric{font-size:27px;font-weight:750;margin-top:9px}.sub{color:#64748b;font-size:13px;margin-top:5px}.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:16px}.panel{padding:16px}.panel h2{font-size:16px;margin:0 0 8px} .chart{height:310px}table{width:100%;border-collapse:collapse;margin-top:10px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #e8edf3}th{font-size:11px;color:#64748b;text-transform:uppercase}td:last-child,th:last-child{text-align:right}.risk{color:#c2410c;font-weight:700}@media(max-width:800px){.kpis,.grid{grid-template-columns:1fr}.hero{align-items:start;gap:12px;flex-direction:column}}
+  </style>
+</head>
+<body><main class="shell">
+  <div class="hero"><div><h1>Marketing Funnel & Revenue Leak</h1><p>Synthetic B2B SaaS cohort · January 2025–June 2026 · refreshed from analysis outputs</p></div><div class="tag">Executive view</div></div>
+  <section class="kpis" id="kpis"></section>
+  <section class="grid"><div class="panel"><h2>Channel funnel: leads to customers</h2><div id="funnel" class="chart"></div></div><div class="panel"><h2>MQL → SQL conversion by channel</h2><div id="conversion" class="chart"></div></div></section>
+  <section class="grid"><div class="panel"><h2>Expected pipeline ARR by channel</h2><div id="arr" class="chart"></div></div><div class="panel"><h2>Prioritized revenue-leak opportunity</h2><table><thead><tr><th>Channel</th><th>Annualized revenue at risk</th></tr></thead><tbody id="risks"></tbody></table><p class="sub">Potential revenue uses conversion shortfall, average deal value, and observed win rate. It is a planning estimate, not booked revenue.</p></div></section>
+</main><script>
+const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
+const num=n=>new Intl.NumberFormat('en-US').format(n);
+async function load(){
+  const [summary,raw]=await Promise.all([fetch('../outputs/summary.json').then(r=>r.json()),fetch('../outputs/channel_funnel.csv').then(r=>r.text())]);
+  const lines=raw.trim().split('\n'), keys=lines.shift().split(','); const d=lines.map(line=>Object.fromEntries(line.split(',').map((v,i)=>[keys[i],isNaN(+v)?v:+v])));
+  const k=[['Leads',num(summary.total_leads),'Top-of-funnel cohort'],['MQL → SQL',summary.overall_mql_sql_rate+'%','Primary handoff health'],['Expected pipeline',money(summary.total_expected_arr),'Open opportunity ARR'],['Response-time risk',money(summary.late_response_revenue_at_risk),'Over 24-hour SLA']];
+  document.querySelector('#kpis').innerHTML=k.map(x=>`<div class="card"><div class="label">${x[0]}</div><div class="metric">${x[1]}</div><div class="sub">${x[2]}</div></div>`).join('');
+  const channels=d.map(x=>x.channel);
+  Plotly.newPlot('funnel',[{type:'bar',name:'Leads',x:channels,y:d.map(x=>x.leads),marker:{color:'#bfdbfe'}},{type:'bar',name:'MQLs',x:channels,y:d.map(x=>x.mqls),marker:{color:'#60a5fa'}},{type:'bar',name:'SQLs',x:channels,y:d.map(x=>x.sqls),marker:{color:'#2563eb'}},{type:'bar',name:'Customers',x:channels,y:d.map(x=>x.customers),marker:{color:'#1e3a8a'}}],{barmode:'group',margin:{l:45,r:10,t:8,b:75},legend:{orientation:'h'},paper_bgcolor:'white',plot_bgcolor:'white',yaxis:{gridcolor:'#eef2f7'}},{responsive:true});
+  Plotly.newPlot('conversion',[{type:'bar',x:d.map(x=>x.mql_sql_rate),y:channels,orientation:'h',marker:{color:d.map(x=>x.mql_sql_rate<summary.overall_mql_sql_rate?'#f97316':'#2563eb')},text:d.map(x=>x.mql_sql_rate+'%'),textposition:'auto'}],{margin:{l:115,r:20,t:8,b:40},paper_bgcolor:'white',plot_bgcolor:'white',xaxis:{ticksuffix:'%',gridcolor:'#eef2f7',range:[0,65]},shapes:[{type:'line',x0:summary.overall_mql_sql_rate,x1:summary.overall_mql_sql_rate,y0:0,y1:1,yref:'paper',line:{dash:'dash',color:'#64748b'}}]},{responsive:true});
+  Plotly.newPlot('arr',[{type:'bar',x:channels,y:d.map(x=>x.expected_arr),marker:{color:'#0f766e'},hovertemplate:'%{x}<br>%{y:$,.0f}<extra></extra>'}],{margin:{l:55,r:10,t:8,b:75},paper_bgcolor:'white',plot_bgcolor:'white',yaxis:{tickprefix:'$',tickformat:'~s',gridcolor:'#eef2f7'}},{responsive:true});
+  document.querySelector('#risks').innerHTML=summary.channel_revenue_leak.sort((a,b)=>b.annualized_revenue_at_risk-a.annualized_revenue_at_risk).map(x=>`<tr><td>${x.channel}</td><td class="risk">${money(x.annualized_revenue_at_risk)}</td></tr>`).join('');
+} load().catch(()=>document.body.innerHTML='<main class="shell"><h1>Run the analysis first</h1><p>From the repository root: <code>python src/generate_data.py</code>, then <code>python src/analyze_funnel.py</code>.</p></main>');
+</script></body></html>
