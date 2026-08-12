@@ -1,228 +1,201 @@
 Marketing Revenue & Growth Case Study
 
-Executive Summary
+Turning Marketing Data Into Revenue Decisions
 
-Marketing performance is not just about lead volume. It is about revenue conversion.
+Catherine Lazare | Marketing Strategy • Revenue Growth • Marketing Analytics • Business Analysis
 
-In many organizations, strong top of funnel activity masks a deeper issue. Significant revenue loss occurs after lead capture due to weak qualification, inefficient nurturing, and low conversion across the funnel.
+⸻
 
-In this project, I analyze a simulated B2B marketing funnel to identify where revenue leakage occurs across the full customer journey:
+📊 Project Overview
+
+How can a marketing team increase revenue without simply spending more money to acquire more leads?
+
+This project analyzes a simulated B2B marketing funnel containing 5,000 leads to identify conversion bottlenecks, revenue leakage, channel performance, and opportunities for growth.
+
+The analysis follows the complete customer journey:
 
 Lead → MQL → SQL → Opportunity → Customer → Revenue
 
-Key Insight
-
-The primary issue is not lead generation, but conversion inefficiency within the funnel.
-
-Even with strong lead volume, the business loses an estimated ~$1.8M in potential revenue due to drop offs at qualification, sales conversion, and follow up stages.
-
-Business Outcome
-
-The analysis shows that improving conversion rates, particularly MQL to SQL and Opportunity to Customer, delivers a higher ROI than simply increasing acquisition spend.
-
-In this scenario, optimizing funnel performance alone can drive 40 to 120 percent revenue improvement without additional marketing investment, making conversion optimization the highest impact growth lever.
+Rather than focusing only on lead volume, the project evaluates marketing performance based on its ability to generate qualified pipeline and revenue.
 
 ⸻
 
-Business Problem
+Executive Snapshot
 
-The company was generating a significant number of leads, but revenue growth was not keeping pace with marketing activity.
+Metric	Result
+Leads Analyzed	5,000
+Simulated Revenue	$2.68M
+Estimated Revenue Opportunity	$3.16M
+Funnel Stages	6
+Marketing Channels	6
 
-Leadership wanted to understand:
-
-* Where are potential customers dropping out of the funnel
-* Which marketing channels produce the highest quality leads
-* Where are conversion rates weakest
-* How much potential revenue is being lost
-* Which problems should marketing address first
-* How can marketing and sales work together to improve revenue
-
-Rather than simply reporting marketing metrics, I approached the problem from a revenue perspective.
+Key insight: The largest growth opportunity is not necessarily generating more leads. Improving conversion efficiency within the existing funnel can unlock significant additional revenue.
 
 ⸻
 
-Funnel Analysis
+🎯 Business Problem
 
-The customer journey was analyzed across six stages:
+The company is generating substantial marketing activity, but revenue growth is not keeping pace.
 
-Funnel Stage	Business Question
-Lead	Are we generating enough prospects
-MQL	Are marketing activities producing qualified prospects
-SQL	Are qualified prospects becoming sales ready
-Opportunity	Are sales opportunities progressing
-Customer	Are opportunities converting
-Revenue	Which activities ultimately generate revenue
+Leadership wants to understand:
 
-The analysis focused on identifying the points where prospects were being lost and estimating the financial impact of those losses.
+* Which marketing channels produce the highest-quality leads?
+* Where are prospects dropping out of the funnel?
+* Which conversion stages represent the largest opportunities?
+* How much potential revenue is being lost?
+* Which marketing activities deserve additional investment?
+* Where should marketing and sales improve their handoff?
 
-⸻
+The goal is to move beyond activity-based marketing metrics and connect:
 
-Revenue Leak Framework
-
-I evaluated potential revenue leakage across four primary areas.
-
-1. Acquisition Leakage
-
-Are marketing channels generating large volumes of leads but relatively few qualified prospects
-
-A high volume of leads does not necessarily indicate strong marketing performance
-
-The more important question is:
-
-How many leads have a realistic path to revenue
+Marketing Activity → Customer Behavior → Pipeline → Revenue
 
 ⸻
 
-2. Qualification Leakage
+🔎 What I Analyzed
 
-Are leads entering the database but failing to progress into sales qualified opportunities
+1. Funnel Performance
 
-Potential causes include:
+I analyzed conversion across:
 
-* Poor lead scoring
-* Weak targeting
-* Inaccurate segmentation
-* Low intent traffic
-* Inconsistent qualification criteria
-* Poor marketing to sales alignment
+Lead → MQL → SQL → Opportunity → Customer
+
+This identifies where prospects are being lost and where conversion improvements could have the greatest financial impact.
 
 ⸻
 
-3. Conversion Leakage
+2. Marketing Channel Performance
 
-Are qualified prospects reaching the opportunity stage but failing to become customers
+Six marketing channels were evaluated:
 
-Potential causes include:
+* LinkedIn
+* Paid Search
+* Organic Search
+* Email
+* Webinar
+* Referral
 
-* Weak value proposition
-* Poor sales follow up
-* Pricing objections
-* Competitive pressure
-* Lack of nurturing
-* Poor customer experience
-* Ineffective sales enablement
+Each channel was evaluated based on:
+
+* Lead volume
+* MQL generation
+* SQL generation
+* Opportunity creation
+* Customer acquisition
+* Revenue
+* Marketing spend
+* Revenue-to-spend efficiency
+
+This prevents high-volume channels from automatically being treated as high-performing channels.
 
 ⸻
 
-4. Follow Up Leakage
+3. Revenue Leakage
 
-Are potential customers being lost because leads are not being contacted or nurtured effectively
+The analysis identifies potential revenue leakage at key funnel stages.
 
-A lead that does not receive timely follow up can become a missed revenue opportunity
+The model benchmarks weaker conversion rates against the strongest observed performance within the simulated dataset.
 
-I therefore included the following process in the analysis:
+This produces an estimated revenue opportunity, not a claim of actual lost company revenue.
+
+Estimated revenue opportunity: ~$3.16M
+
+⸻
+
+4. Follow-Up Performance
+
+Lead follow-up timing was incorporated into the dataset to evaluate whether delayed follow-up could represent another source of revenue leakage.
+
+The analysis considers:
 
 Lead Created → Lead Assigned → First Contact → Qualified → Opportunity → Customer
 
 ⸻
 
-Marketing Channel Analysis
+📈 Dashboard
 
-Marketing channels were evaluated based on more than lead volume
+The project includes executive-style visualizations designed to answer five questions:
 
-The analysis considered:
+1. Where are leads coming from?
+2. Which channels produce qualified prospects?
+3. Which channels generate opportunities?
+4. Which channels generate revenue?
+5. Where is the funnel leaking?
 
-Channel → Leads → MQLs → SQLs → Opportunities → Customers → Revenue
-
-This distinction is important because a channel generating 1000 leads may be less valuable than a channel generating 200 leads if those 200 leads produce significantly more qualified opportunities and revenue
-
-Core principle
-
-Optimize for revenue quality, not simply lead quantity
+View Dashboard
 
 ⸻
 
-Key Performance Indicators
+🐍 Python Analysis
 
-The analysis focused on metrics that connect marketing activity to business outcomes
+The Python analysis calculates:
 
-Acquisition Metrics
+* Funnel conversion rates
+* Channel performance
+* Marketing spend
+* Revenue
+* Pipeline value
+* Revenue-to-spend efficiency
+* Revenue leakage
+* Growth scenarios
 
-* Lead volume
-* Cost per lead
-* Traffic
-* Campaign performance
-
-Funnel Metrics
-
-* Lead to MQL conversion
-* MQL to SQL conversion
-* SQL to Opportunity conversion
-* Opportunity to Customer conversion
-* Overall funnel conversion
-
-Revenue Metrics
-
-* Pipeline generated
-* Revenue generated
-* Revenue per lead
-* Customer acquisition cost
-* Cost per opportunity
-* Marketing sourced revenue
+View Python Analysis
 
 ⸻
 
-Key Findings
+🗄️ SQL Analysis
 
-The analysis identified several areas of potential revenue leakage
+SQL queries reproduce the core marketing analysis from a database perspective.
 
-Finding 1: Lead Volume Was Not the Primary Problem
+The queries demonstrate how to:
 
-The business was generating sufficient lead volume
+* Aggregate funnel stages
+* Calculate conversion rates
+* Compare marketing channels
+* Analyze revenue
+* Evaluate follow-up performance
 
-The larger opportunity was improving the percentage of leads progressing through the funnel
-
-⸻
-
-Finding 2: Qualification Was a Major Bottleneck
-
-A significant percentage of marketing qualified leads were failing to become sales qualified leads
-
-This suggests an opportunity to improve:
-
-* Lead scoring
-* Targeting
-* Segmentation
-* Qualification criteria
-* Marketing and sales alignment
+View SQL Analysis
 
 ⸻
 
-Finding 3: Opportunity Conversion Created Significant Revenue Leakage
+📊 Dataset
 
-A meaningful percentage of sales opportunities failed to convert into customers
+The project uses a simulated dataset containing 5,000 B2B leads.
 
-Because opportunities represent prospects with significantly higher purchase intent, improving this stage can have a disproportionate impact on revenue
+Each record includes information such as:
 
-⸻
+* Lead ID
+* Marketing channel
+* Industry
+* Company size
+* MQL status
+* SQL status
+* Opportunity status
+* Customer status
+* First-contact timing
+* Estimated annual contract value
+* Marketing spend
+* Pipeline value
+* Revenue
+* Lead score
+* Follow-up SLA status
 
-Finding 4: Increasing Marketing Spend Could Amplify Existing Problems
-
-Simply generating more leads would not necessarily solve the company’s revenue problem
-
-If existing conversion bottlenecks remain unresolved, increasing acquisition spend could create:
-
-More leads → More unqualified leads → More sales workload → More lost opportunities
-
-The recommended strategy is therefore:
-
-Fix the funnel → Improve conversion → Then scale acquisition
-
-⸻
-
-Recommendations
-
-Recommendation 1: Optimize the Funnel Before Increasing Acquisition Spend
-
-Identify and address the largest conversion bottlenecks before increasing marketing budgets
-
-Improving conversion rates can increase revenue without requiring a proportional increase in marketing spend
+Explore the Dataset
 
 ⸻
 
-Recommendation 2: Improve Lead Scoring
+💼 Executive Recommendation
 
-Create a more structured lead scoring model based on:
+The analysis supports a simple strategic principle:
+
+Fix the funnel before scaling the funnel.
+
+Instead of immediately increasing acquisition spend, the recommended strategy is to:
+
+1. Improve Lead Qualification
+
+Refine lead scoring using:
 
 * Firmographic fit
 * Engagement
@@ -231,125 +204,91 @@ Create a more structured lead scoring model based on:
 * Company size
 * Website behavior
 * Content engagement
-* Previous interactions
 
-This allows marketing and sales teams to prioritize the prospects most likely to convert
+2. Improve Marketing-to-Sales Handoff
 
-⸻
+Establish clear definitions for:
 
-Recommendation 3: Establish Lead Follow Up Standards
+MQL → SQL → Opportunity
 
-Create clear expectations for how quickly sales qualified leads should receive follow up
+and create measurable follow-up expectations.
 
-Track:
+3. Strengthen Lead Nurturing
 
-Lead Created → Lead Assigned → First Contact → Qualified → Opportunity
+Develop segmented nurture campaigns based on:
 
-This makes it possible to determine whether revenue is being lost because of marketing performance, sales execution, or the handoff between the two
-
-⸻
-
-Recommendation 4: Strengthen Lead Nurturing
-
-Not every lead is ready to purchase immediately
-
-Develop segmented nurturing campaigns based on:
-
-* Industry
 * Buyer persona
+* Industry
 * Funnel stage
 * Product interest
-* Engagement level
+* Engagement
 * Purchase intent
 
-The goal is to move prospects forward rather than allowing them to become inactive leads
+4. Optimize Opportunity Conversion
+
+Identify why qualified opportunities fail to become customers and address:
+
+* Value proposition
+* Sales enablement
+* Pricing objections
+* Competitive pressure
+* Customer experience
+
+5. Reallocate Marketing Investment
+
+Shift resources toward channels producing stronger downstream outcomes rather than simply the highest number of leads.
 
 ⸻
 
-Recommendation 5: Build a Marketing to Revenue Dashboard
+🚀 30/60/90-Day Marketing Plan
 
-Leadership should be able to answer five questions from one dashboard:
+Days 1–30 — Diagnose
 
-1. Where are leads coming from
-2. Which channels produce qualified prospects
-3. Which channels create opportunities
-4. Which channels generate revenue
-5. Where is the funnel leaking
+* Audit lead scoring
+* Define MQL/SQL criteria
+* Analyze response times
+* Identify funnel bottlenecks
+* Establish baseline KPIs
+* Build executive dashboard
 
-⸻
+Days 31–60 — Optimize
 
-Recommendation 6: Align Marketing and Sales Around Revenue
+* Implement revised lead scoring
+* Launch segmented nurturing
+* Improve marketing/sales handoff
+* Establish follow-up SLA reporting
+* Reallocate underperforming channel spend
 
-Marketing and sales should share definitions and KPIs for:
+Days 61–90 — Scale
 
-* Qualified leads
-* Sales ready leads
-* Opportunities
-* Pipeline
-* Revenue
-* Conversion rates
-
-The goal is to eliminate the traditional disconnect between:
-
-“Marketing generated the lead.”
-
-and
-
-“Sales did not convert it.”
-
-Both teams should ultimately be accountable for improving the customer journey and revenue outcome
+* Measure conversion improvement
+* Compare results against baseline
+* Calculate incremental pipeline and revenue
+* Scale high-performing campaigns
+* Reduce inefficient acquisition spend
+* Present revenue impact to leadership
 
 ⸻
 
-Strategic Growth Opportunity
+🧠 Key Marketing Insight
 
-The biggest opportunity identified through this analysis is conversion optimization
+The most important question is not:
 
-Rather than immediately increasing acquisition spend, the company can potentially generate substantially more revenue by improving the efficiency of the existing funnel
+“How many leads did marketing generate?”
 
-The strategic sequence should be:
+It is:
 
-1. Identify the leak
+“How much qualified pipeline and revenue did marketing create?”
 
-↓
+This project demonstrates how marketing data can be transformed into business decisions by connecting:
 
-2. Quantify the financial impact
-
-↓
-
-3. Fix the bottleneck
-
-↓
-
-4. Measure conversion improvement
-
-↓
-
-5. Scale what works
-
-This approach reduces wasted marketing spend while improving revenue efficiency
+Acquisition → Qualification → Conversion → Pipeline → Revenue
 
 ⸻
 
-Business Impact
+🛠️ Skills Demonstrated
 
-The purpose of this analysis is not simply to produce another marketing report
-
-It is to answer a more important business question:
-
-Where is the company losing potential revenue, and what can marketing do about it
-
-The analysis demonstrates how marketing data can be transformed into actionable business decisions
-
-The estimated ~$1.8M revenue leakage represents the potential value associated with improving funnel performance in this simulated scenario
-
-The projected 40 to 120 percent revenue improvement opportunity demonstrates how significantly conversion optimization can affect growth when substantial leakage exists within the funnel
-
-⸻
-
-Tools and Skills Demonstrated
-
-Marketing Strategy
+Marketing
 
 * Marketing strategy
 * Demand generation
@@ -364,62 +303,62 @@ Marketing Strategy
 Analytics
 
 * Funnel analysis
-* Conversion rate analysis
 * Revenue analysis
-* Customer acquisition analysis
+* Conversion-rate analysis
 * KPI development
-* Data visualization
 * Business intelligence
+* Data visualization
 * Performance reporting
+* Revenue opportunity modeling
 
 Technology
 
 * Python
 * SQL
-* Power BI
+* Power BI-style dashboarding
 * CRM analytics
-* GA4
+* GA4 concepts
 * Marketing automation
 * Spreadsheet analysis
 
 ⸻
 
-My Marketing Philosophy
+📁 Repository Structure
 
-Marketing should not be measured solely by activity
-
-It should be connected to business outcomes
-
-A high performing marketing organization should be able to connect:
-
-Marketing Activity → Customer Behavior → Pipeline → Revenue
-
-My approach is:
-
-Do not just measure what marketing is doing. Measure what marketing is producing for the business
+marketing-revenue-growth-case-study/
+│
+├── README.md
+│
+├── data/
+│   └── simulated_b2b_marketing_funnel.csv
+│
+├── analysis/
+│   └── revenue_funnel_analysis.py
+│
+├── sql/
+│   └── marketing_funnel_queries.sql
+│
+├── dashboard/
+│   ├── marketing_funnel_dashboard.png
+│   └── channel_revenue.png
+│
+└── recommendations/
+    └── executive_marketing_recommendation.md
 
 ⸻
 
-About Me
+👩🏽‍💼 About Me
 
 Catherine Lazare
 
 Marketing Strategy | Revenue Growth | Marketing Analytics | Business Analysis
 
-I am a marketing professional focused on the intersection of marketing, analytics, revenue growth, and business strategy
+I focus on the intersection of marketing strategy, analytics, customer acquisition, and revenue growth.
 
-I enjoy identifying the points where businesses lose potential customers and developing practical strategies to improve acquisition, conversion, customer experience, and revenue
-
-This project demonstrates how I approach marketing problems using data, business analysis, and strategic thinking
-
+My approach to marketing is centered on identifying where businesses lose potential customers, quantifying the business impact, and developing practical strategies to improve conversion and revenue.
 
 ⸻
 
-Contact
-
-Catherine Lazare
-
-Marketing Strategy | Revenue Growth | Marketing Analytics
+📬 Contact
 
 LinkedIn: https://www.linkedin.com/in/msbattle
-
